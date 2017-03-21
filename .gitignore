@@ -12,8 +12,9 @@ npm-debug.log
 .DS_Store
 /Library/FailedAssetImports.txt
 /Library/cache/
+/Library/ShaderCache/
 /Library/previews/
-/Library/ScriptAssemblies
-/obj
-/Temp
-/App
+/Library/ScriptAssemblies/
+/obj/
+/Temp/
+/HoloApp/
