@@ -5,7 +5,7 @@ var sizeOf = require('image-size');
 
 function fileListingAsJson ( files ) {
 
-    return files
+    return { 'files': files
         .filter( function ( name ) {
 
             return /(png|jpg)$/.test( name );
@@ -20,7 +20,7 @@ function fileListingAsJson ( files ) {
             };
         })
         .reverse()
-    ;
+    };
 }
 
 var HologramManager = function () {

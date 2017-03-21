@@ -10,21 +10,25 @@ public class HologramManager : MonoBehaviour
     public Button dataFetcher;
     public Text dataDisplayer;
 
+	private HologramAssets assets;
+	private string dataHost = "http://ip169-109.vpro.nl:8080/";
+
     // Use this for initialization
     void Start()
     {
-        Debug.Log("HololensStarted");
-        StartCoroutine(GetText());
+        Debug.Log("HololensStarted, press the button for data retrieval");
+
+		dataFetcher.onClick.AddListener (doGetText);
     }
 
     void doGetText()
     {
-        StartCoroutine(GetText());
+		StartCoroutine(GetAssets());
     }
 
-    IEnumerator GetText()
+    IEnumerator GetAssets()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("http://ip169-109.vpro.nl:8080/list/"))
+		using (UnityWebRequest www = UnityWebRequest.Get( dataHost +"list/"))
         {
             yield return www.Send();
 
@@ -41,6 +45,11 @@ public class HologramManager : MonoBehaviour
                 {
                     dataDisplayer.text = www.downloadHandler.text;
                 }
+
+				assets = JsonUtility.FromJson<HologramAssets> (www.downloadHandler.text);
+				Debug.Log ( "How many assets?" );
+				Debug.Log ( assets.files.Length );
+
                 // Or retrieve results as binary data
                 byte[] results = www.downloadHandler.data;
             }
