@@ -1,0 +1,15 @@
+{
+  "name": "strp-workshop",
+  "version": "0.1.0",
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "image-size": "~0.5.1",
+    "nodemon": "~1.11.0",
+    "q": "~1.4.1"
+  },
+  "scripts": {
+    "debug": "DEBUG=strp nodemon ./server/server.js"
+  }
+}

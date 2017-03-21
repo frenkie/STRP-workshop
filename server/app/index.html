@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Uploader</title>
+    <style>
+
+        *{
+            box-sizing: border-box;
+        }
+
+        .image-dropper {
+            position: relative;
+            margin: 10px;
+            background-color: lightblue;
+            border-radius: 10px;
+            width: 240px;
+            height: 180px;
+        }
+
+        .image-dropper:before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX( -50% ) translateY( -50% );
+            display: block;
+            content: 'Drag & drop your transparent PNG image';
+        }
+
+        .image-preview img {
+            max-width: 300px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="app">
+
+        <h1>Image Uploader</h1>
+        <div class="image-dropper"></div>
+
+        <h3>upload preview</h3>
+        <div class="image-preview"></div>
+        <button class="image-upload">Upload!</button>
+
+
+        <h2>All images</h2>
+        <ul class="image-list"></ul>
+    </div>
+
+    <script src="js/strp.js"></script>
+</body>
+</html>
