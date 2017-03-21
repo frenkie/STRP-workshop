@@ -19,3 +19,7 @@ Waarbij `naam-van-plaatje` de naam is zonder de plaatjes folder en extensie.
 
 [localhost:8080/deselect/naam-van-plaatje](http://localhost:8080/deselect/naam-van-plaatje)
 deselecteert hem weer.
+
+En uiteraard
+[localhost:8080/delete/naam-van-plaatje](http://localhost:8080/delete/naam-van-plaatje)
+delete hem.
