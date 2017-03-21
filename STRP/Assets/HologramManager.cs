@@ -11,12 +11,12 @@ public class HologramManager : MonoBehaviour
     public Text dataDisplayer;
 
 	private HologramAssets assets;
-	private string dataHost = "http://ip169-109.vpro.nl:8080/";
+	private string dataHost = "https://vprostrp.herokuapp.com/";
 
     // Use this for initialization
     void Start()
     {
-        Debug.Log("HololensStarted, press the button for data retrieval");
+        Debug.Log("HololensStarted, press the button for data retrieval, or just call the doGetText method");
 
 		dataFetcher.onClick.AddListener (doGetText);
     }
