@@ -1,0 +1,1 @@
+web: DEBUG=strp* node server/server.js
