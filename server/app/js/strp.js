@@ -179,16 +179,22 @@
 
         }.bind( this );
 
-        // Read in the Image file as a Data URL.
         reader.readAsDataURL( file );
     }
 
     function onImageImported ( imageData ) {
-        var img = new Image();
-        img.src = imageData;
 
-        imagePreview.innerHTML = '';
-        imagePreview.appendChild( img );
+        var img;
+
+        if ( /^data:image\/png/.test( imageData ) ) {
+            img = new Image();
+            img.src = imageData;
+
+            imagePreview.innerHTML = '';
+            imagePreview.appendChild( img );
+        } else {
+            alert('Alleen PNG-tjes uploaden alsjeblieft.');
+        }
     }
 
 
