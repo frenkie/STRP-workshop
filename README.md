@@ -13,9 +13,9 @@ Met [localhost:8080/selection](http://localhost:8080/selection) haal je de lijst
 
 Voor nu kan je alleen even selecteren/deselecteren door het volgende aan te roepen:
 
-[localhost:8080/select/naam-van-plaatje.png](http://localhost:8080/select/naam-van-plaatje.png)
+[localhost:8080/select/naam-van-plaatje](http://localhost:8080/select/naam-van-plaatje)
 
-Waarbij `naam-van-plaatje` de naam is zonder de plaatjes folder.
+Waarbij `naam-van-plaatje` de naam is zonder de plaatjes folder en extensie.
 
-[localhost:8080/deselect/naam-van-plaatje.png](http://localhost:8080/deselect/naam-van-plaatje.png)
+[localhost:8080/deselect/naam-van-plaatje](http://localhost:8080/deselect/naam-van-plaatje)
 deselecteert hem weer.

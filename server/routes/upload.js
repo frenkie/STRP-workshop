@@ -8,17 +8,23 @@ router.post('/upload', bodyParser.text({
 }), function ( req, res ) {
 
     var timestamp = Date.now();
-    var base64Data = req.body.replace( /^data:image\/png;base64,/, '');
+    var base64Data;
 
-    fs.writeFile( __dirname +'/../database/'+ timestamp +'.png', base64Data, 'base64', function ( err ) {
+    if ( /^data:image\/png;base64,/.test( req.body ) ) {
 
-        if ( err ) {
-            res.end('notok');
-        } else {
-            res.end('ok');
-        }
-    });
+        base64Data  = req.body.replace( /^data:image\/png;base64,/, '');
 
+        fs.writeFile( __dirname + '/../database/' + timestamp + '.png', base64Data, 'base64', function ( err ) {
+
+            if ( err ) {
+                res.end( 'notok' );
+            } else {
+                res.end( 'ok' );
+            }
+        } );
+    } else {
+        res.end( 'notok' );
+    }
 } );
 
 module.exports = router;

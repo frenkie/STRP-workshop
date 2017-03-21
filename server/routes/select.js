@@ -6,7 +6,7 @@ router.get( '/select/:name', function ( req, res ) {
 
     if ( req.params.name ) {
 
-        HologramManager.select( req.params.name );
+        HologramManager.select( req.params.name +'.png' );
         res.send({
             status: 'Ok'
         });

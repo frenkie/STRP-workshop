@@ -6,10 +6,12 @@ var HologramManager = require('../lib/HologramManager');
 router.get( '/erase/:image', function ( req, res ) {
 
     var filePath;
+    var fileName;
 
     if ( req.params.image && /^[\w\.]+$/.test( req.params.image ) ) {
 
-        filePath = __dirname +'/../database/'+ req.params.image;
+        fileName = req.params.image +'.png';
+        filePath = __dirname +'/../database/'+ fileName;
 
         fs.stat( filePath, function ( err, stats ) {
 
@@ -18,7 +20,7 @@ router.get( '/erase/:image', function ( req, res ) {
                 res.end('notok');
             } else {
 
-                HologramManager.deselect( req.params.image ); // to be sure
+                HologramManager.deselect( fileName ); // to be sure
 
                 fs.unlinkSync( filePath );
                 res.end('ok');

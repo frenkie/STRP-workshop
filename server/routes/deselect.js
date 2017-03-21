@@ -6,7 +6,7 @@ router.get( '/deselect/:name', function ( req, res ) {
 
     if ( req.params.name ) {
 
-        HologramManager.deselect( req.params.name );
+        HologramManager.deselect( req.params.name +'.png' );
         res.send({
             status: 'Ok'
         });

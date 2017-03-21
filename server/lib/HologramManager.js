@@ -3,26 +3,6 @@ var fs = require('fs');
 var path = require('path');
 var sizeOf = require('image-size');
 
-function fileListingAsJson ( files ) {
-
-    return { 'files': files
-        .filter( function ( name ) {
-
-            return /(png|jpg)$/.test( name );
-        })
-        .map( function ( name ) {
-            var dimensions = sizeOf( path.resolve ( __dirname, '../database/'+ name ) );
-
-            return {
-                name: 'images/'+ name,
-                width: dimensions.width,
-                height: dimensions.height
-            };
-        })
-        .reverse()
-    };
-}
-
 var HologramManager = function () {
 
     this.selection = {};
@@ -36,6 +16,29 @@ HologramManager.prototype = {
         }
     },
 
+    fileListingAsJson: function ( files ) {
+
+        var filesAsJson = files
+            .filter( function ( name ) {
+                return /png$/.test( name );
+            })
+            .map( function ( name ) {
+                var dimensions = sizeOf( path.resolve ( __dirname, '../database/'+ name ) );
+
+                return {
+                    name: 'images/'+ name,
+                    selected: this.isSelected( name ),
+                    width: dimensions.width,
+                    height: dimensions.height
+                };
+            }.bind( this ) )
+            .reverse();
+
+        return {
+            'files': filesAsJson
+        };
+    },
+
     getAll: function () {
         var deferred = Q.defer();
 
@@ -43,7 +46,7 @@ HologramManager.prototype = {
             if ( err ) {
                 deferred.reject();
             } else {
-                deferred.resolve( fileListingAsJson( files ) );
+                deferred.resolve( this.fileListingAsJson( files ) );
             }
         }.bind( this ));
 
@@ -58,7 +61,11 @@ HologramManager.prototype = {
             selection.push( name );
         }
 
-        return fileListingAsJson( selection );
+        return this.fileListingAsJson( selection );
+    },
+
+    isSelected: function ( name ) {
+        return !!( this.selection[ name ] );
     },
 
     select: function ( name ) {

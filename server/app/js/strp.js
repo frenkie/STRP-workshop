@@ -2,10 +2,118 @@
 
     /******************************************************/
     // IMAGE LISTING
+    var imageList = document.querySelector('.image-list');
+
+    imageList.addEventListener( 'click', function ( e ) {
+
+        var clickTarget = e.path.shift();
+
+        switch ( clickTarget.tagName.toLowerCase() ) {
+
+            case 'input':
+                if ( clickTarget.checked ) {
+                    selectImage( clickTarget.id );
+                } else {
+                    deselectImage( clickTarget.id );
+                }
+                break;
+
+            case 'button':
+                eraseImage( clickTarget.id.split('delete-').pop() );
+                break;
+        }
+
+    }, false );
 
     function refreshImageListing () {
 
+        var request = new XMLHttpRequest();
+        var imageData;
+
+        request.open('GET', '/list', true );
+
+        request.onload = function () {
+            if ( request.status >= 200 && request.status < 400 ) {
+                imageData = JSON.parse( request.responseText );
+
+                if ( imageData && imageData.files ) {
+
+                    imageList.innerHTML = '';
+
+                    imageData.files.forEach( function ( file ) {
+
+                        var img = document.createElement('img');
+                        var item = document.createElement('li');
+                        var selected = document.createElement('input');
+                        var selectLabel = document.createElement('label');
+                        var deleteBtn = document.createElement('button');
+                        var imageId = file.name.split('/').pop().split('.').shift();
+
+                        img.src = '/'+ file.name;
+                        item.appendChild( img );
+
+                        selected.type = 'checkbox';
+                        selected.id = imageId;
+                        selected.checked = file.selected;
+                        item.appendChild( selected );
+
+                        selectLabel.innerHTML = ' selected';
+                        selectLabel.setAttribute( 'for', imageId );
+                        item.appendChild( selectLabel );
+
+                        deleteBtn.id = 'delete-'+ imageId;
+                        deleteBtn.innerHTML = 'delete';
+                        item.appendChild( deleteBtn );
+
+                        imageList.appendChild( item );
+                    });
+                }
+            }
+
+        };
+
+        request.send();
     }
+
+    function deselectImage ( imageName ) {
+
+        var request = new XMLHttpRequest();
+
+        request.open('GET', '/deselect/'+ imageName, true );
+
+        request.onload = function () {
+            refreshImageListing();
+        };
+
+        request.send();
+    }
+
+    function eraseImage ( imageName ) {
+
+        var request = new XMLHttpRequest();
+
+        request.open('GET', '/erase/'+ imageName, true );
+
+        request.onload = function () {
+            refreshImageListing();
+        };
+
+        request.send();
+    }
+
+    function selectImage ( imageName ) {
+
+        var request = new XMLHttpRequest();
+
+        request.open('GET', '/select/'+ imageName, true );
+
+        request.onload = function () {
+            refreshImageListing();
+        };
+
+        request.send();
+    }
+
 
     /******************************************************/
     // IMAGE UPLOAD
@@ -84,12 +192,11 @@
     }
 
 
-
     /******************************************************/
-    // IMAGE ERASE
+    // INIT
 
+    refreshImageListing();
 
-    /******************************************************/
 
 
 })();
