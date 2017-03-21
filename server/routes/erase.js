@@ -1,7 +1,7 @@
 var express = require('express');
 var fs = require('fs');
 var router = express.Router();
-
+var HologramManager = require('../lib/HologramManager');
 
 router.get( '/erase/:image', function ( req, res ) {
 
@@ -17,6 +17,9 @@ router.get( '/erase/:image', function ( req, res ) {
                 res.status( 500 );
                 res.end('notok');
             } else {
+
+                HologramManager.deselect( req.params.image ); // to be sure
+
                 fs.unlinkSync( filePath );
                 res.end('ok');
             }

@@ -14,6 +14,8 @@ server.listen( port, ipAddress, function () {
     app.use( require('./routes/images') );
     app.use( require('./routes/list') );
     app.use( require('./routes/selection') );
+    app.use( require('./routes/select') );
+    app.use( require('./routes/deselect') );
     app.use( require('./routes/upload') );
     app.use( require('./routes/erase') );
 
