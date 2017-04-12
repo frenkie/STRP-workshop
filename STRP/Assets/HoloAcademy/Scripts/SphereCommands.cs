@@ -36,7 +36,7 @@ public class SphereCommands : MonoBehaviour
 		else
 		{
 			SpatialMapping.Instance.DrawVisualMeshes = false;
-            originalPosition = this.transform.localPosition;
+            //originalPosition = this.transform.localPosition;
 		}
 	}
 

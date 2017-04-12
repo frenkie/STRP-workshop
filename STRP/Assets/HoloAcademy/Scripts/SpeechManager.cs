@@ -31,7 +31,7 @@ public class SpeechManager : MonoBehaviour
 				}
 			});
 
-		keywords.Add("Duplicate", () =>
+		keywords.Add("Copy", () =>
 			{
 				var focusObject = GazeGestureManager.Instance.FocusedObject;
 				if (focusObject != null)

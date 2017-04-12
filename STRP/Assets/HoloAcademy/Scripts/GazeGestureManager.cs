@@ -85,5 +85,6 @@ public class GazeGestureManager : MonoBehaviour
         {
             this.BroadcastMessage("OnReset", null, SendMessageOptions.DontRequireReceiver);
         }
+        
 	}
 }

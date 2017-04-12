@@ -33,17 +33,10 @@ public class DominoCommands : MonoBehaviour
             {
                 rigidbody.isKinematic = true;
             }
-			SpatialMapping.Instance.DrawVisualMeshes = true;
 		}
 		// If the user is not in placing mode, hide the spatial mapping mesh.
 		else
 		{
-			SpatialMapping.Instance.DrawVisualMeshes = false;
-
-			// and save the current position+rotation;
-		    originalPosition = this.transform.localPosition;
-            originalRotation = this.transform.localRotation;
-
             if (rigidbody != null)
             {
                 rigidbody.isKinematic = false;
